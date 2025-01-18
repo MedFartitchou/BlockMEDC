@@ -1,4 +1,3 @@
-
 pragma solidity ^0.8.0;
 import {SharedStructs} from "./Structs.sol";
 contract Certs_Profs{
