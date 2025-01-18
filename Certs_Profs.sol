@@ -1,4 +1,5 @@
-pragma solidity ^0.4.23;
+
+pragma solidity ^0.8.0;
 import {SharedStructs} from "./Structs.sol";
 contract Certs_Profs{
  
@@ -17,7 +18,7 @@ contract Certs_Profs{
         _;
     }
  
-    constructor (address st,address Ainst,address inst) public  {
+    constructor (address st,address Ainst,address inst)   {
         require(st !=address(0x0) && Ainst !=address(0x0) && inst !=address(0x0)); 
         
         diplomas.receiver = st;
@@ -35,15 +36,17 @@ contract Certs_Profs{
         diplomas.status = true;
         emit PrCertIssued(diplomas.issuer_Institution , diplomas.issuer_head, diplomas.receiver, diplomas.date);
     }
-
-    event Revoked(address from, uint date);
-    function revoke() public onlyGiver  {
+    event Revoked(address from, uint256 date);
+   function revoke() public onlyGiver {
         valid = false; // Mark the diploma as invalid when revoked
-        selfdestruct(head);
-        emit Revoked(head , block.timestamp);
+        emit Revoked(head, block.timestamp);
     }
-        // New isValid function to check if the diploma is still valid
+
+    /// @notice Check if the diploma is still valid
     function isValid() public view returns (bool) {
-        return valid; // Return the validity state of the diploma
+        return valid;
     }
+
+    /// @notice Fallback function to accept Ether if sent directly to the contract
+    receive() external payable {}
 }
