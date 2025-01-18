@@ -2,7 +2,6 @@ pragma solidity ^0.8.0;
 import "./MC_Authority.sol";
 import "./University.sol";
 import "./TranscriptCert.sol";
-import "./AcDiploma.sol";
 import "./Certs_Profs.sol";
 import "./Certs_Students.sol";
 import "hardhat/console.sol"; 
